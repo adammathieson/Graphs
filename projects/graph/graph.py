@@ -22,13 +22,30 @@ class Graph:
             self.vertices[v1].add(v2)
         else:
             raise IndexError("That vertex does not exist.")
-        
+
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty queue and enqueue the starting vertex
+        q = Queue()
+        q.enqueue(starting_vertex)
+        # Create an empty set to store visited vertices
+        visited = set()
+        # While the queue is not empty...
+        while q.size() > 0:
+            # Dequeue the first vertex
+            v = q.dequeue()
+            # If that vertex has not been visited...
+            if v not in visited:
+                # Mark as visited
+                print(v)
+                visited.add(v)
+                # Then add all of its neighbors to the back fo the queue
+                for neighbor in self.vertices[v]:
+                    q.enqueue(neighbor)
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
