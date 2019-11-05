@@ -14,8 +14,9 @@ def earliest_ancestor(ancestors, starting_node):
         ancestor_graph.add_edge(i[1], i[0])
 
     if not ancestor_graph.vertices[starting_node]:
+        print("return from no children of starting_node: ", -1)
         return -1
     # print("------>", ancestor_graph.vertices)
-    # print("return from earliest_ancestor: ", ancestor_graph.dfs_deepest(starting_node))
+    print("return from earliest_ancestor: ", ancestor_graph.dfs_deepest(starting_node))
     return ancestor_graph.dfs_deepest(starting_node)
         

@@ -185,7 +185,8 @@ class Graph:
                     # print("stack_size", s.size())
                     # for i in s.stack:
                     #     print("stack contents: ", i)
-            print("---->", deepest_path)
+            # print("---->", deepest_path)
+            # print("====>", deepest_path[-1])
             return deepest_path[-1]
 
 
