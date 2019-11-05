@@ -75,7 +75,16 @@ class Graph:
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+        v = starting_vertex
+        if v not in self.visited:
+            self.visited.add(v)
+            print("recursion!!! ", v)
+            for neighbor in self.vertices:
+                # print(neighbor)
+                self.dft_recursive(neighbor)
+
+
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
@@ -95,11 +104,11 @@ class Graph:
                 self.visited.add(vertex)
 
                 for neighbor in self.vertices[vertex]:
-                    print(neighbor)
+                    # print("bfs-neighbor", neighbor)
                     new_path = path.copy()
 
                     new_path.append(neighbor)
-                    print(new_path)
+                    # print(new_path)
                     q.enqueue(new_path)
 
     def dfs(self, starting_vertex, destination_vertex):
