@@ -116,26 +116,34 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass
-        # s = Stack()
-        # s.push([starting_vertex])
-        # while s.size() > 0:
-        #     path = s.pop()
-        #     vertex = path[-1]
+        s = Stack()
+        s.push([starting_vertex])
 
-        # if vertex not in self.visited:
-        #     if vertex == destination_vertex:
-        #         print("======>", path)
-        #         return path
-        #     self.visited.add(vertex)
+        while s.size() > 0:
+            path = s.pop()
+            vertex = path[-1]
+            print("vert in path", path[-1])
 
-        #     for neighbor in self.vertices[vertex]:
+            if vertex not in self.visited:
+                if vertex == destination_vertex:
+                    print("======>", path)
+                    return path
+                self.visited.add(vertex)
+                print(f"adding {vertex} to visited")
 
-        #         new_path = path.copy()
-        
-        #         new_path.append(neighbor)
+                for neighbor in self.vertices[vertex]:
+                    print("for loop: ", neighbor)
 
-        #         s.push(new_path)
+                    new_path = path.copy()
+            
+                    new_path.append(neighbor)
+                    print("new_path: ", new_path)
+
+                    print("stack_size", s.size())
+                    s.push(new_path)
+                    print("stack_size", s.size())
+                    for i in s.stack:
+                        print("stack contents: ", i)
 
 
 
@@ -167,7 +175,7 @@ if __name__ == '__main__':
     Should print:
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     '''
-    print('1. vertices: ', graph.vertices)
+    # print('1. vertices: ', graph.vertices)
 
     '''
     Valid DFT paths:
@@ -208,11 +216,11 @@ if __name__ == '__main__':
     Valid BFS path:
         [1, 2, 4, 6]
     '''
-    print("BFS: ", graph.bfs(1, 6))
+    # print("BFS: ", graph.bfs(1, 6))
 
     '''
     Valid DFS paths:
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
     '''
-    # print("DFS: ", graph.dfs(1, 6))
+    print("DFS: ", graph.dfs(1, 6))
