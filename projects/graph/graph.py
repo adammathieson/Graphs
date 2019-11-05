@@ -224,3 +224,4 @@ if __name__ == '__main__':
         [1, 2, 4, 7, 6]
     '''
     print("DFS: ", graph.dfs(1, 6))
+
