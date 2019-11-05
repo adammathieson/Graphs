@@ -145,6 +145,49 @@ class Graph:
                     for i in s.stack:
                         print("stack contents: ", i)
 
+    def dfs_deepest(self, starting_vertex):
+            """
+            Return a list containing a path from
+            starting_vertex to deepest in
+            depth-first order.
+            """
+            s = Stack()
+            s.push([starting_vertex])
+            deepest_path = []
+
+            while s.size() > 0:
+                path = s.pop()
+                vertex = path[-1]
+                # print("vert in path: ", path[-1])
+
+                if not self.vertices[vertex]:
+                    if len(path) is None:
+                        continue
+                    elif len(path) > len(deepest_path):
+                        # print("======>", path)
+                        deepest_path = path
+                    elif len(path) == len(deepest_path):
+                        if path[-1] < deepest_path[-1]:
+                            deepest_path = path
+                    # return path[-1]
+                # print(f"adding {vertex} to visited")
+
+                for neighbor in self.vertices[vertex]:
+                    # print("for loop: ", neighbor)
+
+                    new_path = path.copy()
+            
+                    new_path.append(neighbor)
+                    # print("new_path: ", new_path)
+
+                    # print("stack_size", s.size())
+                    s.push(new_path)
+                    # print("stack_size", s.size())
+                    # for i in s.stack:
+                    #     print("stack contents: ", i)
+            print("---->", deepest_path)
+            return deepest_path[-1]
+
 
 
 
