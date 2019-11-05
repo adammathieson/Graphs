@@ -7,6 +7,7 @@ class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
         self.vertices = {}
+        self.visited = set()
 
     def add_vertex(self, vertex):
         """
@@ -79,9 +80,28 @@ class Graph:
         """
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
-        breath-first order.
+        breadth-first order.
         """
-        pass  # TODO
+        q = Queue()
+        q.enqueue([starting_vertex])
+
+        while q.size() > 0:
+            path = q.dequeue()
+            vertex = path[-1]
+
+            if vertex not in self.visited:
+                if vertex == destination_vertex:
+                    return path
+                self.visited.add(vertex)
+
+                for neighbor in self.vertices[vertex]:
+                    print(neighbor)
+                    new_path = path.copy()
+
+                    new_path.append(neighbor)
+                    print(new_path)
+                    q.enqueue(new_path)
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
