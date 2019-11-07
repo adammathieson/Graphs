@@ -94,7 +94,20 @@ class SocialGraph:
             path = q.dequeue()
             user = path[-1]
             if user not in visited:
-                print("NOT IN VISITED", user)
+                # print("NOT IN VISITED", user)
+                visited.update({user:path})
+                for friendID in self.friendships[user]:
+                    # for f in friend:
+                        
+
+                    # print("=====>", friendID)
+                    new_path = path.copy()
+
+                    new_path.append(friendID)
+
+                    # print(q.size())
+                    q.enqueue(new_path)
+                    # print(q.size())
             
             
         # !!!! IMPLEMENT ME
