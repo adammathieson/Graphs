@@ -1,4 +1,5 @@
-
+import random
+from util import Queue
 
 class User:
     def __init__(self, name):
@@ -47,8 +48,32 @@ class SocialGraph:
         # !!!! IMPLEMENT ME
 
         # Add users
+        #call addUser() until our number of users is numUsers
 
-        # Create friendships
+        # Create random friendships
+        for i in range(numUsers):
+            self.addUser(f"User {i+1}")
+
+        # avgFriendships = totalFriendships / numUsers
+        # totalFriendships = avgFriendships * numUsers
+        # Generate a list of all possible friendships
+        possibleFriendships = []
+        # Avoid dups by ensuring the first ID is smaller than the second
+        for userID in self.users:
+            for friendID in range(userID + 1, self.lastID + 1):
+                possibleFriendships.append( (userID, friendID) )
+        print("POSSIBLE FRIENDSHIPS:")
+        print(possibleFriendships)
+
+
+        # Shuffle the list
+        random.shuffle(possibleFriendships)
+        # Slice off totalFriendships
+        totalFriendships = avgFriendships * numUsers // 2
+        print(f"FRIENDSHIPS TO CREATE: {totalFriendships}\n")
+        for i in range(totalFriendships):
+            friendship = possibleFriendships[i]
+            self.addFriendship( friendship[0], friendship[1] )
 
     def getAllSocialPaths(self, userID):
         """
@@ -59,7 +84,19 @@ class SocialGraph:
 
         The key is the friend's ID and the value is the path.
         """
+        q = Queue()
+        q.enqueue( [userID] )
         visited = {}  # Note that this is a dictionary, not a set
+        # visited.update(test='value')
+        print("visited dict: ", visited)
+
+        while q.size() > 0:
+            path = q.dequeue()
+            user = path[-1]
+            if user not in visited:
+                print("NOT IN VISITED", user)
+            
+            
         # !!!! IMPLEMENT ME
         return visited
 
@@ -67,6 +104,9 @@ class SocialGraph:
 if __name__ == '__main__':
     sg = SocialGraph()
     sg.populateGraph(10, 2)
+    print("USERS:")
+    print(sg.users)
+    print("FRIENDSHIPS:")
     print(sg.friendships)
     connections = sg.getAllSocialPaths(1)
     print(connections)
